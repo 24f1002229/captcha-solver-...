@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha Solver</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        #container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        #captchaImage {
+            width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        #urlInput {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #solveButton {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #solveButton:hover {
+            background-color: #218838;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Captcha Solver</h1>
+        <img id="captchaImage" src="https://via.placeholder.com/300" alt="Captcha Image">
+        <input type="text" id="urlInput" placeholder="Enter captcha image URL">
+        <button id="solveButton">Solve Captcha</button>
+        <div id="output"></div>
+    </div>
+    <script>
+        document.getElementById('solveButton').addEventListener('click', function() {
+            const urlInput = document.getElementById('urlInput').value.trim();
+            const output = document.getElementById('output');
+            const captchaImage = document.getElementById('captchaImage');
+            
+            if (urlInput) {
+                captchaImage.src = urlInput;
+                output.textContent = "Captcha loaded. Please enter the solution below.";
+            } else {
+                output.textContent = "Please enter a valid URL.";
+            }
+        });
+
+        const defaultUrl = new URLSearchParams(window.location.search).get('url') || "https://via.placeholder.com/300";
+        document.getElementById('captchaImage').src = defaultUrl;
+    </script>
+</body>
+</html>
